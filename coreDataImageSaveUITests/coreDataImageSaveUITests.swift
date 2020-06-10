@@ -2,8 +2,8 @@
 //  coreDataImageSaveUITests.swift
 //  coreDataImageSaveUITests
 //
-//  Created by Bibin Mathew on 1/8/18.
-//  Copyright © 2018 featherSoft. All rights reserved.
+//  Created by Manuel Soberanis on 10/06/20.
+//  Copyright © 2020 featherSoft. All rights reserved.
 //
 
 import XCTest
