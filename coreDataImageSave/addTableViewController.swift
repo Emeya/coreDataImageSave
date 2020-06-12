@@ -17,6 +17,8 @@ class addTableViewController: UIViewController, UITableViewDelegate, UITableView
         sampleTableView.delegate = self
         sampleTableView.dataSource = self
         // Do any additional setup after loading the view.
+        let name = Notification.Name("didTakePic")
+        NotificationCenter.default.addObserver(self, selector: #selector(fetchData), name: name, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -28,7 +30,7 @@ class addTableViewController: UIViewController, UITableViewDelegate, UITableView
         fetchData()
     }
     
-    func fetchData() {
+    @objc func fetchData() {
         
         do {
             items = try context.fetch(BrowseImage.fetchRequest())

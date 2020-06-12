@@ -26,9 +26,10 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     @IBAction func buttonAction(_ sender: Any) {
         if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum){
             print("Button capture")
-            
+            imagePicker.sourceType = .camera
+            imagePicker.allowsEditing = true
             imagePicker.delegate = self
-            imagePicker.sourceType = .savedPhotosAlbum;
+//            imagePicker.sourceType = .savedPhotosAlbum
             imagePicker.allowsEditing = false
             
             self.present(imagePicker, animated: true, completion: nil)
@@ -48,12 +49,16 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
             return
         }
         let imageData = browseImageView.image!.pngData()
-        print("IMAGE DATA", imageData )
+//        print("IMAGE DATA", imageData )
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let newEntry = BrowseImage(context: context)
         newEntry.image = imageData
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
         dismiss(animated: true, completion: nil)
+        dismiss(animated: true) {
+            let name = Notification.Name("didTakePic")
+            NotificationCenter.default.post(name: name, object: nil)
+        }
     }
 }
 
